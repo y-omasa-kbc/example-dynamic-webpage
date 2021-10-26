@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title>住所録</title>
+</head>
+<body>
+    <header>
+        <h1>住所録</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">一覧</a></li>
+                <li><a href="search.html">検索</a></li>
+                <li><a href="add.html">追加</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main>
+            <table>
+                <tr>
+                    <th>No.</th>
+                    <th>氏名</th>
+                    <th>カナ</th>
+                    <th>性別</th>
+                    <th>tel</th>
+                    <th>e-mail</th>
+                    <th>〒</th>
+                    <th>住所</th>
+                    <th></th>
+                </tr>
+                <% for (var item of ary) { %>
+                    <tr>
+                        <td>
+                            <%= item.id %>
+                        </td>
+                        <td>
+                            <%= item.fullName %>
+                        </td>
+                        <td>
+                            <%= item.fullNameKana %>
+                        </td>
+                        <td>
+                            <%= item.gender %>
+                        </td>
+                        <td>
+                            <%= item.tel %>
+                        </td>
+                        <td>
+                            <%= item.eMail %>
+                        </td>
+                        <td>
+                            <%= item.postalCode %>
+                        </td>
+                        <td>
+                            <%= item.address %>
+                        </td>
+                        <td><a href="edhit.html?id=<%= item.id %>">変更</a> <a href="del.html?id=<%= item.id %>">削除</a></td>
+                    </tr>
+                    <% } %>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
