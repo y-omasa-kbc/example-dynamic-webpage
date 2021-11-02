@@ -2,10 +2,10 @@ import {PeopleModel} from '../models/PeopleModel'
 import {Person} from '../common/Person'
 
 export class PeopleController {
-    public getAll(): Person[] {
+    //全登録者を取得。
+    public async getAll(): Promise<Person[]>  {
         const people = new PeopleModel();
-        const aryPerson = people.all();
-        return aryPerson;
+        return await people.all();
     }
 }
 

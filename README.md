@@ -5,6 +5,20 @@ Intended to be provided to students of Kawahara Computer Business College (KBC) 
 
 ## 各コミットについて(参照用)
 
+### 003: Add sample code for obtaining address data from MySQL running locally 
+ローカルPC上で実行されているMySQLからデータを取得するサンプル。  
+現状では、アドレスのエントリを全部取得・表示する機能のみ。  
+
+#### ddlフォルダ内のファイル
+- create_db.sql  アプリケーションで使用するDB（addressbook）とアクセスユーザーの作成
+- ddl_addressbook.sql  DB（addressbook）内のテーブル、ビューの作成
+- testdata.sql  テストデータ追加
+
+#### 実行方法 (001 より変化なし)
+```
+npx ts-node src/app.ts
+```
+
 ### 002: Add sample code for usage of EJS template engine 
 テンプレートエンジン EJSを使用したウェブページ表示のサンプル。
 #### 実行方法 (001 より変化なし)

@@ -1,15 +1,37 @@
-import {Person} from '../common/Person'
+import { Person } from '../common/Person';
+import * as mysql from "promise-mysql";
+import config from "../config/Config";
 
 export class PeopleModel {
-    public all(): Person[] {
-        const people = new Array();
-        people.push( new Person(1,'篠原 正輝','シノハラ マサキ','男','090-8770-8584 ',' ','229-1113','神奈川県相模原市すすきの町6-2-6'));
-        people.push( new Person(2,'北野 時司','キタノ トキジ','男','090-5708-5330 ','kitano7626@example.ad.jp  ','737-0034','広島県呉市溝路町7-11-4 フリード溝路町 14F'));
-        people.push( new Person(3,'二宮 征四郎','ニノミヤ セイシロウ','男',' ','ninomiya.seisirou@dti.ne.jp  ','283-0012','千葉県東金市下武射田5-7-8 下武射田ガーデン 1002'));
-        people.push( new Person(4,'谷川 良司','タニカワ リョウジ','男','070-5575-7342 ','wknt145@infoseek.co.jp  ','145-0065','東京都大田区東雪谷7-1-8'));
-        people.push( new Person(5,'原口 菜美','ハラグチ ナミ','女','090-5656-2899 ',' ','371-0854','群馬県前橋市大渡町1-2-9'));
-        people.push( new Person(6,'中井 督彦','ナカイ トクヒコ','男','090-7038-8242 ','okihukot207@comeon.to  ','207-0001','東京都東大和市多摩湖7-12-2 スカイコート多摩湖 706'));
-        
-        return people;
+
+    //MySQLに接続
+    private static async connectDb() {
+        return await mysql.createConnection(config.db);
+    };
+
+    //指定されたSQL(SELECT)を実行して、取得したPersonの配列を返す
+    private static async ExecuteSqlSelect(sql: string): Promise<Person[]> {
+        return new Promise<Array<Person>>((resolve, _) => { //<<このメソッドの戻り値>>
+            PeopleModel.connectDb().then((con) => {    //DBへの接続が取得できたので
+                const result = con.query(sql);          //接続にクエリを送る
+                con.end();                              //クエリ実行終了
+                return result;                          //クエリ結果を次のthenへ
+            }).then((rows) => {                       //クエリ終了で結果を受け取り
+                //                console.log( JSON.stringify(rows));
+                const people = new Array();
+                for (var elem of rows) {                  //クエリ結果の各行をelementに入れながらループ
+                    people.push(                        //メソッド呼び出し元に返す配列に入れていく
+                        new Person(elem.id, elem.fullName, elem.fullNameKana, elem.gender,
+                            elem.tel, elem.eMail, elem.postalCode, elem.address));
+                }
+                resolve(people);    //<<このメソッドの戻り値>>のPromiseに値を設定
+            });
+        });
+    }
+
+    //全員のデータを順序指定なしで取得
+    public async all(): Promise<Person[]> {
+        //staticなExecuteSqlSelectを呼び出して、全エントリ取得(DBアクセスのため非同期)
+        return await PeopleModel.ExecuteSqlSelect("SELECT * FROM address_entry");
     }
 }
