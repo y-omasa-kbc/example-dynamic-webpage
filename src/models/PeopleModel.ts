@@ -3,7 +3,6 @@ import * as mysql from "promise-mysql";
 import config from "../config/Config";
 
 export class PeopleModel {
-
     //MySQLに接続
     private static async connectDb() {
         return await mysql.createConnection(config.db);
@@ -27,6 +26,30 @@ export class PeopleModel {
                 resolve(people);    //<<このメソッドの戻り値>>のPromiseに値を設定
             });
         });
+    }
+
+    //指定されたPersonをInsert文で登録する
+    private static async InsertPerson(person: Person): Promise<number> {
+        let queryParam = {
+            sql: "INSERT INTO address_entry (fullName, fullNameKana, gender, tel, eMail, "
+                         + "postalCode, address1) VALUES (?,?,?,?,?,?,?)",
+            values: [person.fullName, person.fullNameKana, person.gender, person.tel, person.eMail,
+                        person.postalCode, person.address]
+        }
+
+        return new Promise<number>((resolve, _) => {    //<<このメソッドの戻り値>>
+            PeopleModel.connectDb().then((con) => {    //DBへの接続が取得できたので
+                const result = con.query(queryParam);   //接続にクエリを送る
+                con.end();                              //クエリ実行終了
+                return result;                          //クエリ結果を次のthenへ
+            }).then((rows) => {                         //クエリ終了で結果を受け取り
+                resolve(rows.insertId);                //<<このメソッドの戻り値>>のPromiseに値を設定
+            });
+        });
+    }
+
+    public async add(newEntry: Person) : Promise<number> {
+        return await PeopleModel.InsertPerson(newEntry);
     }
 
     //全員のデータを順序指定なしで取得

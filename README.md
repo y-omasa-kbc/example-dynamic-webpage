@@ -5,6 +5,18 @@ Intended to be provided to students of Kawahara Computer Business College (KBC) 
 
 ## 各コミットについて(参照用)
 
+### 004: Add sample code for adding address data to the table on MySQL 
+ローカルPC上で実行されているMySQLにデータを追加するサンプル。   
+正常フローのみ対応。エラー処理、バリデーションチェックなどは未実装。  
+  
+追加画面の表示と、POSTされたデータでDBにエントリを追加する処理は両方とも関数addController　（ファイルaddController.ts）で対処している。処理はHTTPリクエストメソッドで切り替えている。
+
+#### 実行方法 (001 より変化なし)
+```
+npx ts-node src/app.ts
+```
+
+
 ### 003: Add sample code for obtaining address data from MySQL running locally 
 ローカルPC上で実行されているMySQLからデータを取得するサンプル。  
 現状では、アドレスのエントリを全部取得・表示する機能のみ。  

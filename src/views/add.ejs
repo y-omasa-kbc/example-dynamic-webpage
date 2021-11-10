@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title>住所録　追加</title>
+</head>
+
+<body>
+    <header>
+        <h1>住所録　追加</h1>
+        <nav>
+            <ul>
+                <li><a href="./">一覧</a></li>
+                <li><a href="search.html">検索</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main>
+
+            <form action="" method="post">
+                <dl>
+                    <dt>お名前<span class="must">※</span></dt>
+                    <dd>
+                        <input type="text" name="name" placeholder="田中 太郎">
+                    </dd>
+                    <dt>フリガナ<span class="must">※</span></dt>
+                    <dd>
+                        <input type="text" name="kana" placeholder="タナカ タロウ">
+                    </dd>
+                    <dt>性別</dt>
+                    <dd>
+                        <label><input type="radio" name="sex" value="男">男</label>
+                        <label><input type="radio" name="sex" value="女">女</label>
+                    </dd>
+                    <dt>Tel</dt>
+                    <dd>
+                        <input type="text" name="tel" placeholder="000-0000-0000">
+                    </dd>
+                    <dt>メールアドレス</dt>
+                    <dd>
+                        <input type="email" name="email" placeholder="sample@test.com">
+                    </dd>
+                    <dt>郵便番号</dt>
+                    <dd>
+                        <input type="text" name="postal" placeholder="000-0000">
+                    </dd>
+                    <dt>住所</dt>
+                    <dd>
+                        <input type="text" name="address" placeholder="愛媛県松山市....">
+                    </dd>
+                </dl>
+                <p class="submit"><input type="submit" name="submit" value="追加"></p>
+            </form>
+
+        </main>
+    </div>
+</body>
+
+</html>
