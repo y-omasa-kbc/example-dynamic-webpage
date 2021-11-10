@@ -21,7 +21,7 @@ export class PeopleModel {
                 for (var elem of rows) {                  //クエリ結果の各行をelementに入れながらループ
                     people.push(                        //メソッド呼び出し元に返す配列に入れていく
                         new Person(elem.id, elem.fullName, elem.fullNameKana, elem.gender,
-                            elem.tel, elem.eMail, elem.postalCode, elem.address));
+                            elem.tel, elem.eMail, elem.postalCode, elem.address1));
                 }
                 resolve(people);    //<<このメソッドの戻り値>>のPromiseに値を設定
             });
