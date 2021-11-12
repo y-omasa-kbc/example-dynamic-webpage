@@ -2,7 +2,6 @@ import Express from "express";
 import path from "path";
 import indexController from "./controllers/indexController";
 import addController from "./controllers/addController";
-import bodyParser from "body-parser";
 
 const app = Express();
 
