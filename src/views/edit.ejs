@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title>住所録　編集</title>
+</head>
+
+<body>
+    <header>
+        <h1>住所録　編集</h1>
+        <nav>
+            <ul>
+                <li><a href="./">一覧</a></li>
+                <li><a href="search.html">検索</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main>
+
+            <form action="" method="post">
+                <input id="id" name="id" type="hidden" value="<%= person.id %>">
+                <dl>
+                    <dt>お名前<span class="must">※</span></dt>
+                    <dd>
+                        <input type="text" name="name" value="<%= person.fullName %>">
+                    </dd>
+                    <dt>フリガナ<span class="must">※</span></dt>
+                    <dd>
+                        <input type="text" name="kana" value="<%= person.fullNameKana %>">
+                    </dd>
+                    <dt>性別</dt>
+                    <dd>
+                        <label><input type="radio" name="sex" value="男" <%= (person.gender=="男") ? 'checked' : '' %>>男</label>
+                        <label><input type="radio" name="sex" value="女" <%= (person.gender=="女") ? 'checked' : '' %>>女</label>
+                        
+                    </dd>
+                    <dt>Tel</dt>
+                    <dd>
+                        <input type="text" name="tel" value="<%= person.tel %>">
+                    </dd>
+                    <dt>メールアドレス</dt>
+                    <dd>
+                        <input type="email" name="email" value="<%= person.eMail %>">
+                    </dd>
+                    <dt>郵便番号</dt>
+                    <dd>
+                        <input type="text" name="postal" value="<%= person.postalCode %>">
+                    </dd>
+                    <dt>住所</dt>
+                    <dd>
+                        <input type="text" name="address" value="<%= person.address %>">
+                    </dd>
+                </dl>
+                <p class="submit"><input type="submit" name="submit" value="変更"></p>
+            </form>
+
+        </main>
+    </div>
+</body>
+
+</html>

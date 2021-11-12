@@ -3,6 +3,7 @@ import * as mysql from "promise-mysql";
 import config from "../config/Config";
 
 export class PeopleModel {
+
     //MySQLに接続
     private static async connectDb() {
         return await mysql.createConnection(config.db);
@@ -48,6 +49,27 @@ export class PeopleModel {
         });
     }
 
+    //引数に指定されたPersonのidを持つエントリをUpdate文で更新する
+    private static async UpdatePerson(person: Person): Promise<number> {
+        let queryParam = {
+            sql: "UPDATE address_entry SET fullName = ?, fullNameKana = ?, gender = ?, tel = ?, "
+                         + "eMail = ?, postalCode = ?, address1 = ? WHERE id = ?",
+            values: [person.fullName, person.fullNameKana, person.gender, person.tel, person.eMail,
+                        person.postalCode, person.address, Number(person.id)]
+        }
+
+        return new Promise<number>((resolve, _) => {    //<<このメソッドの戻り値>>
+            PeopleModel.connectDb().then((con) => {    //DBへの接続が取得できたので
+                const result = con.query(queryParam);   //接続にクエリを送る
+                con.end();                              //クエリ実行終了
+                return result;                          //クエリ結果を次のthenへ
+            }).then((rows) => {                         //クエリ終了で結果を受け取り
+                resolve(rows.changedRows);              //<<このメソッドの戻り値>>のPromiseに値を設定
+            });
+        });
+    }
+
+
     public async add(newEntry: Person) : Promise<number> {
         return await PeopleModel.InsertPerson(newEntry);
     }
@@ -57,4 +79,14 @@ export class PeopleModel {
         //staticなExecuteSqlSelectを呼び出して、全エントリ取得(DBアクセスのため非同期)
         return await PeopleModel.ExecuteSqlSelect("SELECT * FROM address_entry");
     }
+
+    public async findOne(param: { id: number; }): Promise<Person> {
+        const people = await PeopleModel.ExecuteSqlSelect("SELECT * FROM address_entry WHERE id = " + param.id);
+        return people[0];
+    }
+
+    public async edit(updateEntry: Person) {
+        return await PeopleModel.UpdatePerson(updateEntry);
+    }
+
 }

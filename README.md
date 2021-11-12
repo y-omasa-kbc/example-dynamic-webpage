@@ -4,6 +4,15 @@ Intended to be provided to students of Kawahara Computer Business College (KBC) 
 このリポジトリは、河原電子ビジネス専門学校の学生に提供するために作成された、ExpressフレームワークをTypeScriptで使用する動的ページのプロジェクトのサンプルです。
 
 ## 各コミットについて(参照用)
+### 005: Add sample code for updating existing data on MySQL 
+MySQLのテーブル上のデータを更新するサンプル。
+更新対象はindexページの「更新」ボタンをクリックして指定。   
+正常フローのみ対応。エラー処理、バリデーションチェックなどは未実装。  
+
+#### 実行方法 (001 より変化なし)
+```
+npx ts-node src/app.ts
+```
 
 ### 004: Add sample code for adding address data to the table on MySQL 
 ローカルPC上で実行されているMySQLにデータを追加するサンプル。   
