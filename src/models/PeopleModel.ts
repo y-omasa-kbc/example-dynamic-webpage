@@ -10,7 +10,7 @@ export class PeopleModel {
     };
 
     //指定されたSQL(SELECT)を実行して、取得したPersonの配列を返す
-    private static async ExecuteSqlSelect(sql: string): Promise<Person[]> {
+    private static async executeSqlSelect(sql: string): Promise<Person[]> {
         return new Promise<Array<Person>>((resolve, _) => { //<<このメソッドの戻り値>>
             PeopleModel.connectDb().then((con) => {    //DBへの接続が取得できたので
                 const result = con.query(sql);          //接続にクエリを送る
@@ -30,7 +30,7 @@ export class PeopleModel {
     }
 
     //指定されたPersonをInsert文で登録する
-    private static async InsertPerson(person: Person): Promise<number> {
+    private static async insertPerson(person: Person): Promise<number> {
         let queryParam = {
             sql: "INSERT INTO address_entry (fullName, fullNameKana, gender, tel, eMail, "
                          + "postalCode, address1) VALUES (?,?,?,?,?,?,?)",
@@ -50,7 +50,7 @@ export class PeopleModel {
     }
 
     //引数に指定されたPersonのidを持つエントリをUpdate文で更新する
-    private static async UpdatePerson(person: Person): Promise<number> {
+    private static async updatePerson(person: Person): Promise<number> {
         let queryParam = {
             sql: "UPDATE address_entry SET fullName = ?, fullNameKana = ?, gender = ?, tel = ?, "
                          + "eMail = ?, postalCode = ?, address1 = ? WHERE id = ?",
@@ -71,22 +71,22 @@ export class PeopleModel {
 
 
     public async add(newEntry: Person) : Promise<number> {
-        return await PeopleModel.InsertPerson(newEntry);
+        return await PeopleModel.insertPerson(newEntry);
     }
 
     //全員のデータを順序指定なしで取得
     public async all(): Promise<Person[]> {
         //staticなExecuteSqlSelectを呼び出して、全エントリ取得(DBアクセスのため非同期)
-        return await PeopleModel.ExecuteSqlSelect("SELECT * FROM address_entry");
+        return await PeopleModel.executeSqlSelect("SELECT * FROM address_entry");
     }
 
     public async findOne(param: { id: number; }): Promise<Person> {
-        const people = await PeopleModel.ExecuteSqlSelect("SELECT * FROM address_entry WHERE id = " + param.id);
+        const people = await PeopleModel.executeSqlSelect("SELECT * FROM address_entry WHERE id = " + param.id);
         return people[0];
     }
 
     public async edit(updateEntry: Person) {
-        return await PeopleModel.UpdatePerson(updateEntry);
+        return await PeopleModel.updatePerson(updateEntry);
     }
 
 }
