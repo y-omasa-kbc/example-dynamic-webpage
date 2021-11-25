@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title>住所録　削除</title>
+</head>
+
+<body>
+    <header>
+        <h1>住所録　削除</h1>
+        <nav>
+            <ul>
+                <li><a href="./">一覧</a></li>
+                <li><a href="search.html">検索</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main>
+            <form action="" method="post">
+                <input id="id" name="id" type="hidden" value="<%= person.id %>">
+                <input id="token" name="token" type="hidden" value="<%= token %>">
+                お名前：<%= person.fullName %><br>
+                フリガナ：<%= person.fullNameKana %><br>
+                性別：<%= person.gender %><br>
+                Tel：<%= person.tel %>"<br>
+                メールアドレス：<%= person.eMail %><br>
+                郵便番号：<%= person.postalCode %><br>
+                住所：<%= person.address %><br>
+                このエントリを削除しますか？<br>
+                <p class="submit"><input type="submit" name="submit" value="削除"></p>
+            </form>
+
+        </main>
+    </div>
+</body>
+
+</html>

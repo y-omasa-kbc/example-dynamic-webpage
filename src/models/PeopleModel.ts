@@ -69,6 +69,22 @@ export class PeopleModel {
         });
     }
 
+    public async del(id: number):Promise<number> {
+        let queryParam = {
+            sql: "DELETE FROM address_entry WHERE id=?",
+            values: [id]
+        }
+
+        return new Promise<number>((resolve, _) => {    //<<このメソッドの戻り値>>
+            PeopleModel.connectDb().then((con) => {    //DBへの接続が取得できたので
+                const result = con.query(queryParam);   //接続にクエリを送る
+                con.end();                              //クエリ実行終了
+                return result;                          //クエリ結果を次のthenへ
+            }).then((rows) => {                         //クエリ終了で結果を受け取り
+                resolve(rows.affectedRows);             //<<このメソッドの戻り値>>のPromiseに値を設定
+            });
+        });
+    }
 
     public async add(newEntry: Person) : Promise<number> {
         return await PeopleModel.insertPerson(newEntry);

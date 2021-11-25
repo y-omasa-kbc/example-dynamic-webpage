@@ -11,6 +11,11 @@ export class PeopleController {
         return await people.findOne({id: id})
     }
 
+    public async del(id: number) {
+        const people = new PeopleModel();
+        return await people.del(id);
+    }
+
     public async add(newEntry: Person) {
         const people = new PeopleModel();
         return await people.add(newEntry);

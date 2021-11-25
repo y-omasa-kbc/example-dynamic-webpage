@@ -4,6 +4,16 @@ Intended to be provided to students of Kawahara Computer Business College (KBC) 
 このリポジトリは、河原電子ビジネス専門学校の学生に提供するために作成された、ExpressフレームワークをTypeScriptで使用する動的ページのプロジェクトのサンプルです。
 
 ## 各コミットについて(参照用)
+### 006: Add sample code for deleting existing data on MySQL 
+MySQLのテーブル上のデータを削除するサンプル。
+更新対象はindexページの「削除」リンクをクリックして指定。   
+正常フローのみ対応。リクエスト元確認用のtokenデータを埋め込む仕様になっているが、tokenの確認は現時点で未実装。  
+
+#### 実行方法 (001 より変化なし)
+```
+npx ts-node src/app.ts
+```
+
 ### 005: Add sample code for updating existing data on MySQL 
 MySQLのテーブル上のデータを更新するサンプル。
 更新対象はindexページの「更新」ボタンをクリックして指定。   
@@ -24,7 +34,6 @@ npx ts-node src/app.ts
 ```
 npx ts-node src/app.ts
 ```
-
 
 ### 003: Add sample code for obtaining address data from MySQL running locally 
 ローカルPC上で実行されているMySQLからデータを取得するサンプル。  
@@ -47,7 +56,6 @@ npx ts-node src/app.ts
 npx ts-node src/app.ts
 ```
 サンプルはMVCの形式を踏襲。データは最終的にDBMSから取得するが、現時点ではソースコード上で設定。
-
 
 ### 001: Minimum Setup using Express on TypeScript 
 TypeScriptでExpressフレームワークを使用するための最低限のセットアップ。

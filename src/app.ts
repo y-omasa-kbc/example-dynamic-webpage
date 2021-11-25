@@ -3,6 +3,7 @@ import path from "path";
 import indexController from "./controllers/indexController";
 import addController from "./controllers/addController";
 import editController from "./controllers/editController";
+import delController from "./controllers/delController";
 
 const app = Express();
 
@@ -12,6 +13,9 @@ app.use(Express.static(__dirname + '/public'));     //CSSファイルのため�
 app.use(Express.urlencoded({extended: true}));
 
 app.get("/", indexController);
+
+app.get("/del", delController);
+app.post("/del", delController);
 
 app.get("/edit", editController);
 app.post("/edit", editController);
