@@ -4,6 +4,16 @@ Intended to be provided to students of Kawahara Computer Business College (KBC) 
 このリポジトリは、河原電子ビジネス専門学校の学生に提供するために作成された、ExpressフレームワークをTypeScriptで使用する動的ページのプロジェクトのサンプルです。
 
 ## 各コミットについて(参照用)
+### 007: refactor: all public methods in PeopleModel changed to static   
+PeopleModelのすべてのpublicメソッドをstaticに変更しました。
+PeopleModelで保持するべきステータスが存在しないため、このように変更します。
+
+#### 実行方法 (001 より変化なし)
+```
+npx ts-node src/app.ts
+```
+
+
 ### 006: Add sample code for deleting existing data on MySQL 
 MySQLのテーブル上のデータを削除するサンプル。
 更新対象はindexページの「削除」リンクをクリックして指定。   

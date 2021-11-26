@@ -3,27 +3,22 @@ import {Person} from '../common/Person'
 
 export class PeopleController {
     public async edit(updateEntry: Person) {
-        const people = new PeopleModel();
-        return await people.edit(updateEntry);
+        return await PeopleModel.edit(updateEntry);
     }
     public async get(id: number): Promise<Person> {
-        const people = new PeopleModel();
-        return await people.findOne({id: id})
+        return await PeopleModel.findOne({id: id})
     }
 
     public async del(id: number) {
-        const people = new PeopleModel();
-        return await people.del(id);
+        return await PeopleModel.del(id);
     }
 
     public async add(newEntry: Person) {
-        const people = new PeopleModel();
-        return await people.add(newEntry);
+        return await PeopleModel.add(newEntry);
     }
     //全登録者を取得。
     public async getAll(): Promise<Person[]>  {
-        const people = new PeopleModel();
-        return await people.all();
+        return await PeopleModel.all();
     }
 }
 

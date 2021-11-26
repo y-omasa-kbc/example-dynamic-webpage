@@ -69,7 +69,7 @@ export class PeopleModel {
         });
     }
 
-    public async del(id: number):Promise<number> {
+    public static async del(id: number):Promise<number> {
         let queryParam = {
             sql: "DELETE FROM address_entry WHERE id=?",
             values: [id]
@@ -86,22 +86,22 @@ export class PeopleModel {
         });
     }
 
-    public async add(newEntry: Person) : Promise<number> {
+    public static async add(newEntry: Person) : Promise<number> {
         return await PeopleModel.insertPerson(newEntry);
     }
 
     //全員のデータを順序指定なしで取得
-    public async all(): Promise<Person[]> {
+    public static async all(): Promise<Person[]> {
         //staticなExecuteSqlSelectを呼び出して、全エントリ取得(DBアクセスのため非同期)
         return await PeopleModel.executeSqlSelect("SELECT * FROM address_entry");
     }
 
-    public async findOne(param: { id: number; }): Promise<Person> {
+    public static async findOne(param: { id: number; }): Promise<Person> {
         const people = await PeopleModel.executeSqlSelect("SELECT * FROM address_entry WHERE id = " + param.id);
         return people[0];
     }
 
-    public async edit(updateEntry: Person) {
+    public static async edit(updateEntry: Person) {
         return await PeopleModel.updatePerson(updateEntry);
     }
 
